@@ -4,10 +4,20 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
 
-// getAllUsers = (req, res) => {
-//   db.any('SELECT * FROM users')
-// }
-
+getAllUsers = (req, res, next) => {
+  db
+    .any("select * from users")
+    .then(function(data) {
+      res.status(200).json({
+        status: "success",
+        data: data,
+        message: "Crystal has Retrieved ALL users"
+      });
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+}
 signupuUser = (req, res) => {
   bcrypt.genSalt(saltRounds, function(err, salt) {
       bcrypt.hash(req.body.password, salt, function(err, hash) {
@@ -29,8 +39,7 @@ signupuUser = (req, res) => {
             console.log('Create User Error: ',err);
             res.status(500).send('error creating user')
           })
-        }
-      });
+        })
   })
 }
 
@@ -64,4 +73,5 @@ signinUser = (res, req) =>{
 module.exports = {
   signupuUser: signupuUser,
   signinUser: signinUser,
+  getAllUsers: getAllUsers,
 }
