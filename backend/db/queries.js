@@ -19,21 +19,19 @@ getAllUsers = (req, res, next) => {
     });
 }
 signupuUser = (req, res) => {
+  console.log("signup");
   bcrypt.genSalt(saltRounds, function(err, salt) {
       bcrypt.hash(req.body.password, salt, function(err, hash) {
-        db.any('INSERT INTO users (first_name, last_name, username, password_digest, email) VALUES (${firstName}, ${lastName}, ${username}, ${password}, ${email})', {
-          firstName: req.body.firstName,
-          lastName:req.body.lastName,
+        db.any('INSERT INTO users (full_name, username, password_digest, email) VALUES (${full_name}, ${username}, ${password}, ${email})', {
+          full_name: req.body.full_name,
           username: req.body.username,
           email:req.body.email,
           password: hash,
         })
         .then(() => {
-
+          console.log(`created user: ${req.body.username}`);
           res.send(`created user: ${req.body.username}`);
-          if(next) { // this is super hacky, next will be undefined in seed.js
-              loginUser()
-          }
+
         })
           .catch(err => {
             console.log('Create User Error: ',err);

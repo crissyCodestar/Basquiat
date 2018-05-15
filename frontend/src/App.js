@@ -6,14 +6,14 @@ import Login from './Components/Login/Login';
 import Explore from './Components/Boards/ExploreContainer/ExploreContainer';
 import ProfileContainer from './Components/Profile/ProfileContainer/ProfileContainer';
 import Nav from './Components/Nav/Nav';
-import App from 'grommet/components/App';
+// import App from 'grommet/components/App';
 
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <App>
+      <div>
         <Nav/>
       <Switch>
           <Route strict exact path='/' component={Home}/>
@@ -22,7 +22,7 @@ class App extends Component {
           <Route path='/explore' component={Explore}/>
           <Route path='/:username' component={ProfileContainer}/>
       </Switch>
-      </App>
+      </div>
     );
   }
 }
