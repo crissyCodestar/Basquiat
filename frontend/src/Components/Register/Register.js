@@ -20,7 +20,8 @@ class Register extends Component{
       emailInput: "",
       passwordInput: "",
       confirmPassword: "",
-      message: ""
+      message: "",
+      registered:false
     }
     this.submitRegForm = this.submitRegForm.bind(this);
   }
@@ -60,6 +61,7 @@ console.log("signup", this.state.emailInput);
           emailInput: "",
           message: "Inserted User"
           });
+
       })
       .catch(err => {
         console.log(err);

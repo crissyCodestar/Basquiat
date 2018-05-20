@@ -8,9 +8,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/signup', db.signupuUser );
-
-router.post('/signin', db.signinUser);
+router.post('/signup', db.signup );
+//
+// router.post('/signin', db.signinUser);
 
 router.get('/allUsers', db.getAllUsers);
 

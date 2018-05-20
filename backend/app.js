@@ -9,7 +9,10 @@ var passport = require('passport');
 var cors = require('cors');
 
 var index = require('./routes/index');
-const db = require("./db/index");
+var user = require('./routes/user');
+var auth = require('./routes/auth');
+
+require('./passport');
 
 var app = express();
 
@@ -27,7 +30,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-
+app.use('/user', passport.authenticate('jwt', {session:false}), user);
+app.use('/auth', auth);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -18,7 +18,8 @@ getAllUsers = (req, res, next) => {
       return next(err);
     });
 }
-signupuUser = (req, res) => {
+
+signup = (req, res) => {
   console.log("signup");
   bcrypt.genSalt(saltRounds, function(err, salt) {
       bcrypt.hash(req.body.password, salt, function(err, hash) {
@@ -43,33 +44,32 @@ signupuUser = (req, res) => {
 
 
 
-signinUser = (res, req) =>{
-  new LocalStrategy(options, (username, password, done) => {
-   console.log("trying to authenticate");
-   db.any("SELECT * FROM users WHERE username=$1", [username])
-     .then(rows => {
-       const user = rows[0];
-       console.log("user: ", user);
-       if (!user) {
-         return done(null, false);
-       }
-       if (!bcrypt.compare(password, user.password_digest)) {
-         return done(null, false);
-       } else {
-         return done(null, user);
-       }
-     })
-     .catch(err => {
-       console.log("error: ", err);
-       return done(err);
-     });
- })
-}
+// signinUser = (res, req) =>{
+//   new LocalStrategy(options, (username, password, done) => {
+//    console.log("trying to authenticate");
+//    db.any("SELECT * FROM users WHERE username=$1", [username])
+//      .then(rows => {
+//        const user = rows[0];
+//        console.log("user: ", user);
+//        if (!user) {
+//          return done(null, false);
+//        }
+//        if (!bcrypt.compare(password, user.password_digest)) {
+//          return done(null, false);
+//        } else {
+//          return done(null, user);
+//        }
+//      })
+//      .catch(err => {
+//        console.log("error: ", err);
+//        return done(err);
+//      });
+//  })
+// }
 
 
 
 module.exports = {
-  signupuUser: signupuUser,
-  signinUser: signinUser,
-  getAllUsers: getAllUsers,
+signup,
+getAllUsers,
 }
