@@ -1,14 +1,96 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { withRouter } from 'react-router';
+import {Link, Redirect} from 'react-router-dom';
+
+import AuthRoutes from '../../utils';
+import withAuth from '../../withAuth/withAuth';
+import Login from '../Login/Login';
+import ProfileNav from './ProfileNav';
+import Menu from 'grommet/components/Menu';
+import Anchor from 'grommet/components/Anchor';
+import Section from 'grommet/components/Section';
+import MenuIcon from 'grommet/components/icons/base/Menu';
+import App from 'grommet/components/App';
+
+const Auth = new AuthRoutes();
 
 
-const Nav = () => (
-    <div>
-        <Link to='/'>Home</Link>
-        <Link to='/signup'>Join</Link>
-        <Link to='/login'>Login</Link>
-        <Link to='/explore'>explore</Link>
-    </div>
-)
+class Nav extends Component{
+  constructor(props,context){
+    super(props,context);
+    this.state = {
+      signinActive: false
+    }
+    this.handleLogout = this.handleLogout.bind(this);
+    this.Auth = new AuthRoutes();
+  }
 
-export default Nav;
+
+
+    handleLogout(){
+      Auth.logout();
+      return <Redirect to='/'/>
+    }
+
+
+
+
+
+
+
+  render(){
+console.log(this.props.location);
+    if(Auth.loggedIn()){
+      return(
+        <Section>
+            <Section>
+              <Menu responsive={true}
+                icon={<MenuIcon />}
+                inline={false}
+                primary={true}
+                size='small'>
+                <Anchor path={'/'}
+                  className='active'>
+                Home
+                </Anchor>
+                <Anchor path={'/explore'}>
+                  explore
+                </Anchor>
+                <Anchor path={`/`}  onClick={this.handleLogout}>
+                  Logout
+
+                </Anchor>
+              </Menu>
+          </Section>
+
+              <ProfileNav />
+
+      </Section>
+
+      )
+    }else {
+      return(
+        <Menu responsive={true}
+          icon={<MenuIcon />}
+          inline={false}
+          primary={true}
+          size='small'>
+          <Anchor path={'/'}
+            className='active'>
+          Home
+          </Anchor>
+          <Anchor path={'/explore'}>
+            explore
+          </Anchor>
+          <Anchor path={"/login" }>
+          Sign In
+          </Anchor>
+        </Menu>
+      )
+    }
+
+  }
+
+}
+
+export default withRouter(Nav);

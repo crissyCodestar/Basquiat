@@ -4,13 +4,14 @@ import Home from './Components/Home/HomeContainer/Home';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
 import Explore from './Components/Boards/ExploreContainer/ExploreContainer';
-import ProfileContainer from './Components/Profile/ProfileContainer/ProfileContainer';
+import Profile from './Components/Profile/ProfileContainer/ProfileContainer';
 import Nav from './Components/Nav/Nav';
 // import App from 'grommet/components/App';
 
 import './App.css';
 
 class App extends Component {
+
   render() {
     return (
       <div>
@@ -20,7 +21,7 @@ class App extends Component {
           <Route path='/signup' component={Register}/>
           <Route path='/login' component={Login}/>
           <Route path='/explore' component={Explore}/>
-          <Route path='/:username' component={ProfileContainer}/>
+          <Route path='/:usernameId' component={Profile}/>
       </Switch>
       </div>
     );
