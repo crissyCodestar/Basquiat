@@ -33,42 +33,7 @@ class Nav extends Component{
     }
 
 
-
-
-
-
-
   render(){
-console.log(this.props.location);
-    if(Auth.loggedIn()){
-      return(
-        <Section>
-            <Section>
-              <Menu responsive={true}
-                icon={<MenuIcon />}
-                inline={false}
-                primary={true}
-                size='small'>
-                <Anchor path={'/'}
-                  className='active'>
-                Home
-                </Anchor>
-                <Anchor path={'/explore'}>
-                  explore
-                </Anchor>
-                <Anchor path={`/`}  onClick={this.handleLogout}>
-                  Logout
-
-                </Anchor>
-              </Menu>
-          </Section>
-
-              <ProfileNav />
-
-      </Section>
-
-      )
-    }else {
       return(
         <Menu responsive={true}
           icon={<MenuIcon />}
@@ -82,12 +47,20 @@ console.log(this.props.location);
           <Anchor path={'/explore'}>
             explore
           </Anchor>
+          {
+            Auth.loggedIn() ?
+            <Anchor path={`/`}  onClick={this.handleLogout}>
+              Logout
+
+            </Anchor>
+          :
           <Anchor path={"/login" }>
-          Sign In
+          Sign In/Sign Up
           </Anchor>
+        }
         </Menu>
       )
-    }
+
 
   }
 

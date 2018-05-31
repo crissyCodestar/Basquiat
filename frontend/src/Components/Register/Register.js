@@ -3,6 +3,8 @@ import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 import RegisterForm from './RegisterForm';
+import ApiRoutes from '../../utils/apiRoutes';
+const Api = new ApiRoutes();
 
 class Register extends Component{
   constructor(props){
@@ -17,6 +19,7 @@ class Register extends Component{
       redirect:false
     }
     this.submitRegForm = this.submitRegForm.bind(this);
+
   }
 
 
@@ -62,6 +65,33 @@ console.log("signup", this.state.emailInput);
 
   }
 
+
+//
+// submitRegForm(e){
+//
+//     e.preventDefault();
+//     const {fullNameInput, usernameInput, passwordInput, comfirmPassword, emailInput, redirect} = this.state
+//     console.log("signup", this.state.usernameInput);
+//
+//     Api.register(
+//       fullNameInput,
+//       usernameInput,
+//       passwordInput,
+//       emailInput
+//       )
+//       .then(res => {
+//         console.log(res);
+//         //If success user is redirected to explore page
+//
+//
+//
+//       })
+//       .catch(err => {
+//         console.log(err);
+//         this.setState({ usernameInput: "", passwordInput: "", message: "Error Inserting User" });
+//       });
+//
+//   }
 
   render(){
     console.log(this.state.redirect);

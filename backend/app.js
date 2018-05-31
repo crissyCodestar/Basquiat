@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('cookie-session');
 var passport = require('passport');
 var cors = require('cors');
+var fileUpload = require('express-fileupload');
 
 var index = require('./routes/index');
 var user = require('./routes/user');
@@ -26,12 +27,20 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+ app.use(fileUpload());
+// app.use(function(req, res, next) {
+// res.header("Access-Control-Allow-Origin", "*");
+// res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// next();
+// });
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/user', passport.authenticate('jwt', {session:false}), user);
 app.use('/auth', auth);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

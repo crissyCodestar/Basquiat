@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link, Route, Switch} from 'react-router-dom';
-
+import AuthRoutes from '../../../utils';
 import ProfileNav from '../../Nav/ProfileNav';
 import Followers from '../../Followers/Followers';
 import Following from '../../Following/Following';
@@ -13,10 +13,12 @@ class Profile extends Component{
   constructor(){
     super();
     this.state={
-
+      user:null
     }
     this.renderProfile = this.renderProfile.bind(this);
   }
+
+
 
   renderProfile(){
     return (

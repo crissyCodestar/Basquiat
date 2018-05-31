@@ -11,7 +11,7 @@ const config = require('../../config');
 
 /* POST login. */
 /*
-authenticate comes from passport.use LocalStrategy
+authentication comes from passport.use LocalStrategy
 ...it creates a new Strategy and sends back user info through token
 ...
 */

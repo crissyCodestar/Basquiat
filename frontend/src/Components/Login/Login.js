@@ -47,7 +47,8 @@ class Login extends Component{
     this.setState({ signinActive: true })
   }
 
-submitLoginForm(e){
+submitLoginForm( e){
+
     e.preventDefault();
     const {usernameInput, passwordInput} = this.state
     console.log("signup", this.state.usernameInput);
@@ -61,6 +62,7 @@ submitLoginForm(e){
         //If success user is redirected to explore page
         const usernameId = res.user.username
       this.props.history.replace(`/${usernameId}`)
+
 
       })
       .catch(err => {

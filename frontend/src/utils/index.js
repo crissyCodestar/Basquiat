@@ -7,6 +7,8 @@ class AuthRoutes {
     this.getUserProfile = this.getUserProfile.bind(this)
   }
 
+  
+
   login(username, password){
 console.log(username);
     return this.fetch('/auth/login', {
@@ -26,7 +28,7 @@ console.log(username);
   // On mount check if user token exists
   loggedIn(){
     const token = this.getToken()
-    console.log(token);
+
     return !!token && !this.isTokenExpired(token)
   }
 
@@ -65,6 +67,7 @@ console.log(username);
   getUserProfile(){
     return decode(this.getToken())
   }
+
 
   // Sets fetch get requests for all queries to back end seeking auth header
   // and checks the response status
