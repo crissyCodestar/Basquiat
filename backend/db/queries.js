@@ -20,7 +20,8 @@ getAllUsers = (req, res, next) => {
 }
 
 signup = (req, res) => {
-  console.log("signup");
+  console.log("signup", req.body);
+
   bcrypt.genSalt(saltRounds, function(err, salt) {
       bcrypt.hash(req.body.password, salt, function(err, hash) {
         db.any('INSERT INTO users (full_name, username, password_digest, email) VALUES (${full_name}, ${username}, ${password}, ${email})', {
@@ -35,13 +36,31 @@ signup = (req, res) => {
 
         })
           .catch(err => {
-            console.log('Create User Error: ',err);
+            console.log('Create User Error: ',err.message, err.res);
             res.status(500).send('error creating user')
           })
         })
   })
 }
 
+updateProfile = (req, res) => {
+  const id = req.params.user_id
+    db.one('UPDATE user SET full_name=($1), username=($2), email=($3), profile_pic_url=($4),WHERE id=($5)',
+  {full_name: req.body.full_name,
+  username: req.body.username,
+  email:req.body.email,
+  profile_pic_url:req.body.profile_pic,
+  id
+})
+  .then(()=> {
+    console.log(`updated user: ${req.body.username}`);
+    res.send(`updated user: ${req.body.username}`);
+  })
+  .catch(err => {
+    console.log('Update User Error: ',err.message, err.res);
+    res.status(500).send('error updating user')
+  })
+}
 
 
 // signinUser = (res, req) =>{
@@ -72,4 +91,5 @@ signup = (req, res) => {
 module.exports = {
 signup,
 getAllUsers,
+updateProfile,
 }

@@ -5,11 +5,11 @@ CREATE DATABASE findingbas;
 
 CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
-  email VARCHAR UNIQUE,
-  username VARCHAR UNIQUE,
-  password_digest VARCHAR,
-  full_name VARCHAR,
-  profile_pic_url BYTEA DEFAULT('https://png.icons8.com/windows/1600/owl.png'),
+  email VARCHAR UNIQUE NOT NULL,
+  username VARCHAR UNIQUE NOT NULL,
+  password_digest VARCHAR NOT NULL,
+  full_name VARCHAR NOT NULL,
+  profile_pic_url TEXT DEFAULT ('https://png.icons8.com/windows/1600/owl.png'),
   create_profile text NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMM'),
   update_profile text NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMM')
 );
@@ -18,7 +18,8 @@ CREATE TABLE photos (
   ID SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(ID),
   caption VARCHAR,
-  photo_url BYTEA DEFAULT('https://png.icons8.com/windows/1600/owl.png'),
+  hashtag VARCHAR,
+  photo_url TEXT DEFAULT ('https://png.icons8.com/windows/1600/owl.png'),
   create_photo text NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMM'),
   update_photo text NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMM')
 );

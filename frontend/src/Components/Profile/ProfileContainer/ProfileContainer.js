@@ -1,28 +1,47 @@
 import React, { Component } from 'react';
-import { Switch, Route} from 'react-router-dom';
+import {Link, Route, Switch} from 'react-router-dom';
+import AuthRoutes from '../../../utils';
+import ProfileNav from '../../Nav/ProfileNav';
 import Followers from '../../Followers/Followers';
 import Following from '../../Following/Following';
-import FeedContainer from '../../Boards/FeedContainer/FeedContainer'
+import FeedContainer from '../../Boards/ProfileFeedContainer/FeedContainer';
 
 
 
-class ProfileContainer extends Component{
+
+class Profile extends Component{
   constructor(){
     super();
     this.state={
-
+      user:null
     }
+    this.renderProfile = this.renderProfile.bind(this);
+  }
+
+
+
+  renderProfile(){
+    return (
+      <div>
+
+          <h1>Profile</h1>
+      </div>
+    )
   }
 
   render(){
     return(
+
+
       <Switch>
-          <Route path='/:username/feed' component={FeedContainer}/>
-          <Route path='/:username/followers' component={Followers}/>
-          <Route path='/:username/following' component={Following}/>
+      <Route exact path='/:usernameId' render={this.renderProfile}/>
+          <Route path='/:usernameId/feed' component={FeedContainer}/>
+          <Route path='/:usernameId/followers' component={Followers}/>
+          <Route path='/:usernameId/following' component={Following}/>
       </Switch>
+
     )
   }
 }
 
-export default ProfileContainer;
+export default Profile;

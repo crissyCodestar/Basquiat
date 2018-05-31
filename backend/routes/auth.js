@@ -10,6 +10,11 @@ const config = require('../../config');
 
 
 /* POST login. */
+/*
+authentication comes from passport.use LocalStrategy
+...it creates a new Strategy and sends back user info through token
+...
+*/
 router.post('/login', function (req, res, next) {
 
     passport.authenticate('local', {session: false}, (err, user, info) => {
@@ -25,9 +30,9 @@ router.post('/login', function (req, res, next) {
             if (err) {
                 res.send(err);
             }
-
+            //User is logged in and token is sent to frontend
             const token = jwt.sign(user, config.secret );
-console.log(token);
+            console.log(token);
             return res.json({user, token});
         });
     })

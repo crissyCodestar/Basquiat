@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
-import Form from 'grommet/components/Form';
-import Header from 'grommet/components/Header';
-import Heading from 'grommet/components/Heading';
-import Footer from 'grommet/components/Footer';
-import Button from 'grommet/components/Button';
-import FormField from 'grommet/components/FormField';
-import TextInput from 'grommet/components/TextInput';
 
 import RegisterForm from './RegisterForm';
+import ApiRoutes from '../../utils/apiRoutes';
+const Api = new ApiRoutes();
 
 class Register extends Component{
   constructor(props){
@@ -21,9 +16,10 @@ class Register extends Component{
       passwordInput: "",
       confirmPassword: "",
       message: "",
-      registered:false
+      redirect:false
     }
     this.submitRegForm = this.submitRegForm.bind(this);
+
   }
 
 
@@ -33,7 +29,6 @@ class Register extends Component{
       const target = e.target;
       const value = target.value;
       const name = target.name;
-  console.log(value);
       this.setState({
         [name]: value
       });
@@ -41,7 +36,7 @@ class Register extends Component{
 
   submitRegForm(e){
 e.preventDefault();
-const {fullNameInput, usernameInput, passwordInput, comfirmPassword, emailInput} = this.state
+const {fullNameInput, usernameInput, passwordInput, comfirmPassword, emailInput, redirect} = this.state
 console.log("signup", this.state.emailInput);
 
     axios.post("/signup", {
@@ -54,7 +49,7 @@ console.log("signup", this.state.emailInput);
       .then(res => {
         console.log(res);
         this.setState({
-          registered: true,
+          redirect: true,
           fullNameInput: "",
           usernameInput: "",
           passwordInput: "",
@@ -71,10 +66,37 @@ console.log("signup", this.state.emailInput);
   }
 
 
+//
+// submitRegForm(e){
+//
+//     e.preventDefault();
+//     const {fullNameInput, usernameInput, passwordInput, comfirmPassword, emailInput, redirect} = this.state
+//     console.log("signup", this.state.usernameInput);
+//
+//     Api.register(
+//       fullNameInput,
+//       usernameInput,
+//       passwordInput,
+//       emailInput
+//       )
+//       .then(res => {
+//         console.log(res);
+//         //If success user is redirected to explore page
+//
+//
+//
+//       })
+//       .catch(err => {
+//         console.log(err);
+//         this.setState({ usernameInput: "", passwordInput: "", message: "Error Inserting User" });
+//       });
+//
+//   }
+
   render(){
-    console.log(this.state.registered);
-    if(this.state.registered){
-      <Redirect to='/login'/>
+    console.log(this.state.redirect);
+    if(this.state.redirect){
+      return <Redirect to={{pathname: '/login' }}/>
     }
     return(
       <RegisterForm

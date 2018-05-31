@@ -17,7 +17,7 @@ class RegisterForm extends Component {
      <Form pad='small'>
        <Header>
              <Heading>
-                   Sample Header
+                   Register
              </Heading>
        </Header>
 
@@ -52,7 +52,8 @@ class RegisterForm extends Component {
            onClick={this.props.submitRegForm}
            />
    </Footer>
-</Form>)
+</Form>
+)
 
 
  }
