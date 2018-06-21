@@ -9,7 +9,8 @@ CREATE TABLE users (
   username VARCHAR UNIQUE NOT NULL,
   password_digest VARCHAR NOT NULL,
   full_name VARCHAR NOT NULL,
-  profile_pic_url TEXT DEFAULT ('https://png.icons8.com/windows/1600/owl.png'),
+  profile_quote VARCHAR,
+  profile_pic_url VARCHAR DEFAULT ('https://png.icons8.com/windows/1600/owl.png'),
   create_profile text NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMM'),
   update_profile text NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMM')
 );
@@ -26,6 +27,13 @@ CREATE TABLE photos (
 
 
 -- This table creates a many to one
+
+CREATE TABLE bookmark (
+    ID SERIAL PRIMARY KEY,
+    photos_id INTEGER REFERENCES photos(ID),
+    user_id INTEGER REFERENCES users(ID),
+    create_bookmark text NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMM')
+);
 
 CREATE TABLE likes (
     ID SERIAL PRIMARY KEY,

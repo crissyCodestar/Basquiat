@@ -80,10 +80,8 @@ submitLoginForm( e){
                   overlayClose={true}
                   onClose={()=> {this.setState({signinActive:false})}}
                    style={{margin:'50%'}}>
-
-
-    </Layer>)
-      : (null)
+              </Layer>
+            ) : (null)
     return(
 
         <Section>

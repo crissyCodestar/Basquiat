@@ -5,7 +5,6 @@ import {Link, Redirect} from 'react-router-dom';
 import AuthRoutes from '../../utils';
 import withAuth from '../../withAuth/withAuth';
 import Login from '../Login/Login';
-import ProfileNav from './ProfileNav';
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
 import Section from 'grommet/components/Section';

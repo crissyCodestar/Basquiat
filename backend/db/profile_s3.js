@@ -42,14 +42,16 @@ if (err) {
       const user_id = req.body.user_id
       console.log("profileURL ",profileURL);
 
-      db.oneOrNone('UPDATE users SET profile_pic_url=($1) WHERE id=($2)', [profileURL, user_id])
+      db.oneOrNone('UPDATE users SET profile_pic_url=($1) WHERE id=($2) RETURNING *', [profileURL, user_id])
         .then(()=> {
           console.log(`inserted in pic:`, data);
-          res.status(status).send(data)
+          res.status(200).json({
+            data
+          })
         })
         .catch(err => {
           console.log('Create User Error: ',err, err.toString());
-          res.status(status).send(message)
+          res.status(500).send(err.message)
         })
 
       });

@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/jwt-decode": "^2.2.1",
     "axios": "^0.18.0",
+    "exif-js": "^2.3.0",
     "grommet": "^1.10.1",
     "grommet-cli": "^5.1.2",
     "grommet-css": "^1.6.0",
