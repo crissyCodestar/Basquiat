@@ -1,0 +1,29 @@
+.image {
+  display: inline-block;
+  position: relative;
+    width: 11vw;
+    height: 11vw;
+    overflow: hidden;
+    border-radius: 3%;
+
+}
+
+.object-fit_fill {
+  object-fit: fill
+}
+
+.object-fit_contain {
+  object-fit: contain
+}
+
+.object-fit_cover {
+  object-fit: cover
+}
+
+.object-fit_none {
+  object-fit: none
+}
+
+.object-fit_scale-down {
+  object-fit: scale-down
+}

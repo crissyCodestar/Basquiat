@@ -31,6 +31,7 @@ const withAuth = (AuthComp) => {
         }
       }
       render(){
+        console.log("History in withAuth ",this.props.history);
         if(this.state.user){
           return (
             <AuthComp history={this.props.history} user={this.state.user} />

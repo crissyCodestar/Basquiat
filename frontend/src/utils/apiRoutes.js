@@ -1,5 +1,9 @@
 class ApiRoutes {
-  
+  constructor(){
+    this.register = this.register.bind(this) // React binding stuff
+
+  }
+
   register(full_name, username, password, email, redirect){
     console.log(full_name);
     return fetch("/signup", {

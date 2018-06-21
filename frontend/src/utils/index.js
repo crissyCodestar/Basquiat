@@ -7,9 +7,8 @@ class AuthRoutes {
     this.getUserProfile = this.getUserProfile.bind(this)
   }
 
-  
 
-  login(username, password){
+login(username, password){
 console.log(username);
     return this.fetch('/auth/login', {
       method: 'POST',

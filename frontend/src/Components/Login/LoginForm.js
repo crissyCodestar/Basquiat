@@ -6,6 +6,7 @@ import Footer from 'grommet/components/Footer';
 import Button from 'grommet/components/Button';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
+import Box from 'grommet/components/Box';
 
 
 
@@ -14,6 +15,14 @@ class LoginFormContent extends Component{
   render(){
     return(
 
+      <Box direction='row'
+        justify='center'
+        align='center'
+        wrap={true}
+        pad='none'
+        margin='small'
+        size='large'
+        colorIndex='light-1'>
 
                 <Form pad='small'>
                   <Header>
@@ -46,7 +55,7 @@ class LoginFormContent extends Component{
                             />
                     </Footer>
               </Form>
-
+</Box>
 
 
     )
