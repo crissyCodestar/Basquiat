@@ -8,6 +8,10 @@ import Login from './Components/Login/Login';
 import ExploreContainer from './Components/Boards/ExploreContainer/ExploreContainer';
 import Profile from './Components/Boards/ProfileContainer/ProfileContainer';
 import Nav from './Components/Nav/Nav';
+import Header from 'grommet/components/Header';
+import Anchor from 'grommet/components/Anchor';
+import Image from 'grommet/components/Image';
+import Title from 'grommet/components/Title';
 
 import Split from 'grommet/components/Split';
 import Box from 'grommet/components/Box';
@@ -15,7 +19,7 @@ import Article from 'grommet/components/Article';
 import Section from 'grommet/components/Section';
 import Headline from 'grommet/components/Headline';
 import './App.css'
-
+import logo from './Graphics/LogoWFB.png'
 // import App from 'grommet/components/App';
 const Auth = new AuthRoutes();
 
@@ -28,22 +32,35 @@ class App extends Component {
       className="App-Bg"
     margin={{ horizontal:'small', vertical: 'none', top: 'small'}}
     scrollStep={false}>
-        <Section
-          className="App-header"
-          pad='small'
-          justify='start'
-          align='end'>
 
-              <Headline
-              pad={{ right:'large'}}>
-                        <Nav/>
-              </Headline>
-        </Section>
+  <Header
+  size='medium'>
+  <Title
+  flex={true}
+    justify='start'
+    direction='row'
+    >
+  <Anchor
+  href='#'
+    path='/' >
+    <Image className="App-header" size='thumb' src={logo} />
+    </Anchor>
+
+  </Title>
+
+  <Box flex={true}
+    justify='end'
+    direction='row'
+    responsive={false}>
+
+      <Nav/>
+  </Box>
+</Header>
         <Section
 
           pad={{ horizontal:'large'}}
           justify='center'
-          align='start'
+          align='center'
           margin={{ horizontal:'small'}}
           >
 
@@ -65,7 +82,7 @@ class App extends Component {
                               justify='center'
                               align='center'
                               pad='medium'
-                              colorIndex='light-2'>
+                              size='xlarge'>
                                     <Switch>
                                         <Route strict exact path='/' component={Home}/>
                                         <Route path='/signup' component={Register}/>

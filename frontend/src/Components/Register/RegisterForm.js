@@ -44,10 +44,10 @@ class RegisterForm extends Component {
    }
    return(
      <Box direction='row'
-       justify='center'
+       justify='start'
        align='center'
        wrap={true}
-       pad='none'
+       pad='large'
        margin='small'
        size='large'
        colorIndex='light-1'>

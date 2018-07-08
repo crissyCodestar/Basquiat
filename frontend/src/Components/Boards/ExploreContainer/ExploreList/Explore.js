@@ -38,11 +38,11 @@ class Explore extends Component{
         wrap={true}
         >
 
-        {
+        { pics ?
           pics.map(pic => (
             <Box
               size='small'
-              pad='small'
+              pad='none'
               justify='center'
               key={pic.id}
               >
@@ -82,6 +82,18 @@ class Explore extends Component{
 
             </Box>
           ))
+          : <Box
+          pad='none'
+          margin='none'
+          >
+          <Heading
+          strong='true'
+          tag='h2'
+          align='center'
+          margin='large'>
+          🙈 Oh no!!! We need you guys to add pics
+          </Heading>
+          </Box>
         }
         </Box>
 </Box>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Explore from './ExploreList/Explore';
 import Header from 'grommet/components/Header';
+import Box from 'grommet/components/Box';
 import AuthRoutes from '../../../utils';
 
 const Auth = new AuthRoutes();
@@ -110,14 +111,17 @@ console.log(this.props);
 
 return(
 
-      <div>
+  <Box
+    pad='medium'
+    margin='small'
+    size='xlarge'>
         <Explore
         {...this.state}
         handleClick={this.handleClick}
         toggleAdd={this.toggleAdd}
          />
 
-      </div>
+      </Box>
 
     )
   }

@@ -5,6 +5,7 @@ import Image from 'grommet/components/Image';
 import Header from 'grommet/components/Heading';
 import Label from 'grommet/components/Label';
 
+import Heading from 'grommet/components/Heading';
 
 
 const Feed = ({pics, user}) => {
@@ -14,15 +15,22 @@ return(
   <Box>
 
   <Header>
-  {user.username}'s Feed
-  </Header>
+        <Heading
+        strong='true'
+        tag='h3'
+        uppercase='true'>
+{user.username} Pics
+  </Heading>
+</Header>
     <Columns
       pad='none'
       size='small'
       align='start'
       justify='between'
       wrap={'true'}>
-    {pics.map(pic => (
+    {
+      pics ?
+      pics.map(pic => (
       <Box align='center'
         pad='none'
         margin='small'
@@ -41,7 +49,20 @@ return(
               {pic.caption}
             </Label>
       </Box>
-    ))}
+    ))
+    : <Box
+    pad='none'
+    margin='none'
+    >
+    <Heading
+    strong='true'
+    tag='h2'
+    align='center'
+    margin='large'>
+        Start by adding some awesome pics 😉
+    </Heading>
+    </Box>
+  }
   </Columns>
   </Box>
 

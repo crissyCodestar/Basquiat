@@ -10,6 +10,7 @@ var myBucket = config.bucket;
 var photoBucket = config.photoBucket;
 var myKey = config.key;
 
+//GET Admin user info
 getAllUsers = (req, res, next) => {
   db
     .any("select * from users")
@@ -25,6 +26,7 @@ getAllUsers = (req, res, next) => {
     });
 }
 
+//POST Signing up users
 signup = (req, res) => {
   console.log("signup", req.body);
   // console.log(req.files.file);
@@ -87,14 +89,7 @@ signup = (req, res) => {
   })
 }
 
-
-
-
-
-
-
-
-
+//POST Profile Update
 updateProfile = (req, res) => {
   const id = req.params.user_id
     db.one('UPDATE user SET full_name=($1), username=($2), email=($3), profile_pic_url=($4),WHERE id=($5)',
@@ -103,7 +98,7 @@ updateProfile = (req, res) => {
   email:req.body.email,
   profile_pic_url:req.body.profile_pic,
   id
-})
+ })
   .then(()=> {
     console.log(`updated user: ${req.body.username}`);
     res.send(`updated user: ${req.body.username}`);
@@ -114,12 +109,10 @@ updateProfile = (req, res) => {
   })
 }
 
-
-
-
+// GET ALL Users images for explore board
 getAllPhotos = (req, res, next) => {
   db
-    .any("select * from photos")
+    .any("select * from photos order by id desc")
     .then(function(data) {
       res.status(200).json({
         status: "success",
@@ -132,7 +125,7 @@ getAllPhotos = (req, res, next) => {
     });
 }
 
-
+// POST user uploaded images for profile board
 photoUpload = (req, res) => {
   console.log("signup", req.body);
   console.log(req.files);
@@ -188,6 +181,25 @@ photoUpload = (req, res) => {
 
 }
 
+// GET all user uploaded photos for profile board
+getPhotosById = (req, res, next) => {
+    const id = req.params.user_id
+    console.log(req.params);
+  db
+    .any("select * from photos where user_id=($1)",[id])
+    .then(function(pics) {
+      res.status(200).json({
+        status: "success",
+        pics: pics,
+        message: "You has retrieved photos"
+      });
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+}
+
+//POST user bookmarked images
 saveToBoard =(req, res) => {
   console.log(req.body);
   const user_id = req.body.user_id
@@ -207,11 +219,12 @@ saveToBoard =(req, res) => {
   })
 }
 
-getPhotosById = (req, res, next) => {
+//GET uaer saved bookmarked Images
+getUserSavedImages = (req, res, next) => {
     const id = req.params.user_id
     console.log(req.params);
   db
-    .any("select * from photos where user_id=($1)",[id])
+    .any("select * from bookmark join photos using (id) where bookmark.user_id=($1)",[id])
     .then(function(pics) {
       res.status(200).json({
         status: "success",
@@ -224,74 +237,23 @@ getPhotosById = (req, res, next) => {
     });
 }
 
-
-// signinUser = (res, req) =>{
-//   new LocalStrategy(options, (username, password, done) => {
-//    console.log("trying to authenticate");
-//    db.any("SELECT * FROM users WHERE username=$1", [username])
-//      .then(rows => {
-//        const user = rows[0];
-//        console.log("user: ", user);
-//        if (!user) {
-//          return done(null, false);
-//        }
-//        if (!bcrypt.compare(password, user.password_digest)) {
-//          return done(null, false);
-//        } else {
-//          return done(null, user);
-//        }
-//      })
-//      .catch(err => {
-//        console.log("error: ", err);
-//        return done(err);
-//      });
-//  })
-// // }
-// getAllUsers = (req, res, next) => {
-//   db
-//     .any("select * from users")
-//     .then(function(data) {
-//       res.status(200).json({
-//         status: "success",
-//         data: data,
-//         message: "Crystal has Retrieved ALL users"
-//       });
-//     })
-//     .catch(function(err) {
-//       return next(err);
-//     });
-// }
-//
-// signup = (req, res) => {
-//   console.log("signup", req.body);
-//   console.log(req.files.file);
-//   console.log(req.body.user_id);
-//
-//   let user = req.body.username;
-//   let imageFile = req.files.file;
-//
-//   bcrypt.genSalt(saltRounds, function(err, salt) {
-//       bcrypt.hash(req.body.password, salt, function(err, hash) {
-//         db.any('INSERT INTO users (full_name, username, password_digest, email) VALUES (${full_name}, ${username}, ${password}, ${email})', {
-//           full_name: req.body.full_name,
-//           username: req.body.username,
-//           email:req.body.email,
-//           password: hash,
-//         })
-//         .then(() => {
-//           console.log(`created user: ${req.body.username}`);
-//           res.send(`created user: ${req.body.username}`);
-//
-//         })
-//           .catch(err => {
-//             console.log('Create User Error: ',err.message, err.res);
-//             res.status(500).send('error creating user')
-//           })
-//         })
-//   })
-// }
-
-
+//GET all userd images except current user
+getSuggestedImages = (req, res, next) => {
+    const id = req.params.user_id
+    console.log(req.params);
+  db
+    .any("select * from bookmark join photos using (id) where bookmark.user_id !=($1)",[id])
+    .then(function(pics) {
+      res.status(200).json({
+        status: "success",
+        pics: pics,
+        message: "You has retrieved photos"
+      });
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+}
 
 module.exports = {
 signup,
@@ -300,5 +262,7 @@ updateProfile,
 photoUpload,
 getAllPhotos,
 getPhotosById,
-saveToBoard
+saveToBoard,
+getUserSavedImages,
+getSuggestedImages,
 }

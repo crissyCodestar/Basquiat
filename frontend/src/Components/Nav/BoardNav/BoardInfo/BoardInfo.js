@@ -10,7 +10,7 @@ import MapLocationIcon from 'grommet/components/icons/base/MapLocation';
 const BoardInfo = ({user}) => (
   <Box flex='grow'
     justify='center'
-    pad='large'
+    pad='none'
     size='small'
     align='center'
     colorIndex='light-2'>
@@ -18,7 +18,7 @@ const BoardInfo = ({user}) => (
         inline={true}
         primary={false}
         direction='row'
-        size='small'>
+        >
         <Anchor
             size='xsmall'
             pad='none'
