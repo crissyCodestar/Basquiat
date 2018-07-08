@@ -32,10 +32,9 @@ componentDidMount(){
     console.log(this.props.user.id);
     return(
       <Box
-        pad='small'
-        margin='none'
-        size='xxlarge'
-        colorIndex='light-2'>
+        pad='medium'
+        margin='small'
+        size='xlarge'>
         <Feed pics={this.state.data} user={this.props.user}/>
       </Box>
     )

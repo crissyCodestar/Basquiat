@@ -9,7 +9,8 @@ import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
 import Section from 'grommet/components/Section';
 import MenuIcon from 'grommet/components/icons/base/Menu';
-import App from 'grommet/components/App';
+import Box from 'grommet/components/Box';
+
 
 const Auth = new AuthRoutes();
 
@@ -34,6 +35,9 @@ class Nav extends Component{
 
   render(){
       return(
+        <Box
+        justify='end'
+          >
         <Menu responsive={true}
           icon={<MenuIcon />}
           inline={false}
@@ -58,6 +62,7 @@ class Nav extends Component{
           </Anchor>
         }
         </Menu>
+        </Box>
       )
 
 

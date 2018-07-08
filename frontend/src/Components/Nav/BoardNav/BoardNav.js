@@ -22,8 +22,9 @@ class BoardNav extends Component {
 
     return(
 
-            <Box flex='grow'
+            <Box
               justify='start'
+              pad='none'
               colorIndex='light-2'>
                   <BoardInfo user={user} />
 

@@ -74,14 +74,14 @@ class Profile extends Component{
                 <Box
                   justify='center'
                   align='start'
-                  pad='medium'>
-                      <SavedImagesContainer />
+                  pad='none'>
+                      <SavedImagesContainer {...this.state} />
                 </Box>
                 <Box
                   justify='center'
                   align='start'
-                  pad='medium'>
-                      <SuggestedImagesContainer />
+                  pad='none'>
+                      <SuggestedImagesContainer {...this.state} />
                 </Box>
 
 
@@ -95,8 +95,13 @@ const {user}=this.state
     return(
 
       <Box>
+      <Box
+        justify='center'
+        align='end'
+        pad='none'
+        >
       <BoardNav />
-
+      </Box>
 
       <Switch>
           <Route exact path='/:usernameId' render={this.renderProfile}/>

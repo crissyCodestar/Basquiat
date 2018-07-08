@@ -8,11 +8,11 @@
 }
 
 .App-header {
-  height: 150px;
-  padding: 20px;
-   background-image: url("./Graphics/LogoBanner.png");
-   background-position: center;
-   background-size: 40%;
+  height: 3em;
+  width: auto;
+  margin-left: 2em;
+  background-position:left;
+
 
 }
 
